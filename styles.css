@@ -118,6 +118,13 @@ canvas {
   gap: 10px;
 }
 
+.analysis-row {
+  display: grid;
+  grid-template-columns: minmax(320px, auto) minmax(300px, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+
 .config-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(160px, 240px));
@@ -148,6 +155,10 @@ canvas {
 
 @media (max-width: 900px) {
   .canvas-area {
+    grid-template-columns: 1fr;
+  }
+
+  .analysis-row {
     grid-template-columns: 1fr;
   }
 

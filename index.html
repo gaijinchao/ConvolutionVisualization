@@ -52,9 +52,16 @@
         </div>
       </section>
 
-      <section class="kernel-section card">
-        <h2>卷积核（3x3）</h2>
-        <div id="kernelGrid" class="kernel-grid"></div>
+      <section class="analysis-row">
+        <section class="kernel-section card">
+          <h2>卷积核（3x3）</h2>
+          <div id="kernelGrid" class="kernel-grid"></div>
+        </section>
+
+        <section class="hover-info card">
+          <h2>卷积过程（hover）</h2>
+          <p id="hoverTip">将鼠标移动到结果图上，查看该点的局部卷积计算信息。</p>
+        </section>
       </section>
 
       <section class="presets card">
@@ -68,11 +75,6 @@
           <button data-preset="gaussian">高斯模糊 Gaussian</button>
           <button data-preset="edgeEnhance">边缘增强</button>
         </div>
-      </section>
-
-      <section class="hover-info card">
-        <h2>卷积过程（hover）</h2>
-        <p id="hoverTip">将鼠标移动到结果图上，查看该点的局部卷积计算信息。</p>
       </section>
     </main>
 
