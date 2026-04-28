@@ -237,6 +237,7 @@ function applyConvolution() {
   resultCanvas.height = outHeight;
   resultImageData = new ImageData(output, outWidth, outHeight);
   resultCtx.putImageData(resultImageData, 0, 0);
+  updateHoverTipDefault();
 }
 
 function formatNeighborhood(resultX, resultY) {
@@ -271,6 +272,14 @@ function formatNeighborhood(resultX, resultY) {
   }
 
   return `输出像素(${resultX}, ${resultY})\n窗口起点=(${srcStartX}, ${srcStartY}) stride=${stride} padding=${padding}\n${lines.join("\n")}\n灰度示意和: ${sum.toFixed(2)}`;
+}
+
+function updateHoverTipDefault() {
+  if (!originalImageData || !resultImageData) {
+    hoverTip.textContent = "将鼠标移动到结果图上，查看该点的局部卷积计算信息。";
+    return;
+  }
+  hoverTip.textContent = formatNeighborhood(0, 0);
 }
 
 function handleImageUpload(file) {
@@ -341,7 +350,7 @@ resultCanvas.addEventListener("mousemove", (event) => {
 });
 
 resultCanvas.addEventListener("mouseleave", () => {
-  hoverTip.textContent = "将鼠标移动到结果图上，查看该点的局部卷积计算信息。";
+  updateHoverTipDefault();
 });
 
 createKernelInputs(kernelSize);

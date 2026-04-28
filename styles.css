@@ -122,7 +122,11 @@ canvas {
   display: grid;
   grid-template-columns: minmax(320px, auto) minmax(300px, 1fr);
   gap: 16px;
-  align-items: start;
+  align-items: stretch;
+}
+
+.analysis-row > .card {
+  height: 100%;
 }
 
 .config-grid {
@@ -151,6 +155,9 @@ canvas {
   font-family: Consolas, Monaco, monospace;
   white-space: pre-wrap;
   line-height: 1.45;
+  min-height: 260px;
+  max-height: 260px;
+  overflow: auto;
 }
 
 @media (max-width: 900px) {
