@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>图像卷积可视化工具</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header class="header">
+        <h1>图像卷积可视化工具</h1>
+        <p>上传图片、编辑 3x3 卷积核，实时观察卷积结果变化。</p>
+      </header>
+
+      <section class="toolbar card">
+        <label class="upload-btn" for="imageInput">上传图片 (JPG / PNG)</label>
+        <input id="imageInput" type="file" accept="image/png,image/jpeg" />
+        <button id="resetBtn" class="secondary">重置</button>
+      </section>
+
+      <section class="canvas-area card">
+        <div class="panel">
+          <h2>原图</h2>
+          <canvas id="sourceCanvas" width="360" height="240"></canvas>
+        </div>
+        <div class="panel">
+          <h2>卷积结果</h2>
+          <canvas id="resultCanvas" width="360" height="240"></canvas>
+        </div>
+      </section>
+
+      <section class="kernel-section card">
+        <h2>卷积核（3x3）</h2>
+        <div id="kernelGrid" class="kernel-grid"></div>
+      </section>
+
+      <section class="presets card">
+        <h2>预设卷积核</h2>
+        <div class="preset-buttons">
+          <button data-preset="identity">单位卷积核</button>
+          <button data-preset="sobel">边缘检测 Sobel</button>
+          <button data-preset="blur">模糊 Blur</button>
+          <button data-preset="sharpen">锐化 Sharpen</button>
+          <button data-preset="laplacian">Laplacian</button>
+        </div>
+      </section>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
