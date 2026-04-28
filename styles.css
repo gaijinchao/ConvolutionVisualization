@@ -144,7 +144,11 @@ canvas {
   display: grid;
   grid-template-columns: minmax(320px, auto) minmax(300px, 1fr);
   gap: 16px;
-  align-items: start;
+  align-items: stretch;
+}
+
+.analysis-row > .card {
+  height: 100%;
 }
 
 .config-grid {
