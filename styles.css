@@ -36,19 +36,16 @@ body {
 }
 
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 16px;
+  display: block;
 }
 
 .github-link {
   font-size: 12px;
   color: #64748b;
+  display: inline-block;
+  margin-top: 2px;
   text-decoration: none;
   word-break: break-all;
-  max-width: 420px;
-  text-align: right;
 }
 
 .github-link:hover {
@@ -201,15 +198,6 @@ canvas {
 }
 
 @media (max-width: 900px) {
-  .header {
-    flex-direction: column;
-  }
-
-  .github-link {
-    text-align: left;
-    max-width: 100%;
-  }
-
   .canvas-area {
     grid-template-columns: 1fr;
   }
