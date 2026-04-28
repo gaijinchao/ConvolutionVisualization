@@ -16,7 +16,29 @@
       <section class="toolbar card">
         <label class="upload-btn" for="imageInput">上传图片 (JPG / PNG)</label>
         <input id="imageInput" type="file" accept="image/png,image/jpeg" />
+        <button id="downloadBtn">下载结果图</button>
         <button id="resetBtn" class="secondary">重置</button>
+      </section>
+
+      <section class="config card">
+        <h2>卷积配置</h2>
+        <div class="config-grid">
+          <label>
+            卷积核尺寸
+            <select id="kernelSizeSelect">
+              <option value="3">3x3</option>
+              <option value="5">5x5</option>
+            </select>
+          </label>
+          <label>
+            stride
+            <input id="strideInput" type="number" min="1" max="8" step="1" value="1" />
+          </label>
+          <label>
+            padding
+            <input id="paddingInput" type="number" min="0" max="8" step="1" value="1" />
+          </label>
+        </div>
       </section>
 
       <section class="canvas-area card">
@@ -43,7 +65,14 @@
           <button data-preset="blur">模糊 Blur</button>
           <button data-preset="sharpen">锐化 Sharpen</button>
           <button data-preset="laplacian">Laplacian</button>
+          <button data-preset="gaussian">高斯模糊 Gaussian</button>
+          <button data-preset="edgeEnhance">边缘增强</button>
         </div>
+      </section>
+
+      <section class="hover-info card">
+        <h2>卷积过程（hover）</h2>
+        <p id="hoverTip">将鼠标移动到结果图上，查看该点的局部卷积计算信息。</p>
       </section>
     </main>
 

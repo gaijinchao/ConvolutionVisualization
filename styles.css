@@ -46,6 +46,7 @@ body {
   display: flex;
   align-items: center;
   gap: 12px;
+  flex-wrap: wrap;
 }
 
 #imageInput {
@@ -80,8 +81,10 @@ button.secondary {
 }
 
 .panel h2,
+.config h2,
 .kernel-section h2,
-.presets h2 {
+.presets h2,
+.hover-info h2 {
   margin: 0 0 12px;
   font-size: 18px;
 }
@@ -95,8 +98,9 @@ canvas {
 }
 
 .kernel-grid {
+  --grid-size: 3;
   display: grid;
-  grid-template-columns: repeat(3, 80px);
+  grid-template-columns: repeat(var(--grid-size), 80px);
   gap: 8px;
 }
 
@@ -114,8 +118,40 @@ canvas {
   gap: 10px;
 }
 
+.config-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(160px, 240px));
+  gap: 12px;
+}
+
+.config-grid label {
+  display: grid;
+  gap: 6px;
+  font-size: 14px;
+}
+
+.config-grid input,
+.config-grid select {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px;
+  background: #fff;
+}
+
+#hoverTip {
+  margin: 0;
+  color: var(--muted);
+  font-family: Consolas, Monaco, monospace;
+  white-space: pre-wrap;
+  line-height: 1.45;
+}
+
 @media (max-width: 900px) {
   .canvas-area {
+    grid-template-columns: 1fr;
+  }
+
+  .config-grid {
     grid-template-columns: 1fr;
   }
 }
