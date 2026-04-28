@@ -10,6 +10,8 @@ const resultCtx = resultCanvas.getContext("2d", { willReadFrequently: true });
 const MAX_WIDTH = 720;
 const MAX_HEIGHT = 480;
 const DEFAULT_KERNEL = [0, 0, 0, 0, 1, 0, 0, 0, 0];
+/** 与 index 同级的 assets/sample.jpg，用于首屏默认展示 */
+const DEFAULT_SAMPLE_SRC = "./assets/sample.jpg";
 
 const PRESETS = {
   identity: [0, 0, 0, 0, 1, 0, 0, 0, 0],
@@ -83,6 +85,19 @@ function resetAll() {
   imageInput.value = "";
 }
 
+function renderImageToCanvases(img) {
+  const adapted = adaptSize(img.width, img.height);
+  sourceCanvas.width = adapted.width;
+  sourceCanvas.height = adapted.height;
+  resultCanvas.width = adapted.width;
+  resultCanvas.height = adapted.height;
+
+  sourceCtx.clearRect(0, 0, adapted.width, adapted.height);
+  sourceCtx.drawImage(img, 0, 0, adapted.width, adapted.height);
+  originalImageData = sourceCtx.getImageData(0, 0, adapted.width, adapted.height);
+  applyConvolution();
+}
+
 function applyConvolution() {
   if (!originalImageData) return;
 
@@ -127,22 +142,20 @@ function handleImageUpload(file) {
   const reader = new FileReader();
 
   reader.onload = (e) => {
-    img.onload = () => {
-      const adapted = adaptSize(img.width, img.height);
-      sourceCanvas.width = adapted.width;
-      sourceCanvas.height = adapted.height;
-      resultCanvas.width = adapted.width;
-      resultCanvas.height = adapted.height;
-
-      sourceCtx.clearRect(0, 0, adapted.width, adapted.height);
-      sourceCtx.drawImage(img, 0, 0, adapted.width, adapted.height);
-      originalImageData = sourceCtx.getImageData(0, 0, adapted.width, adapted.height);
-      applyConvolution();
-    };
+    img.onload = () => renderImageToCanvases(img);
     img.src = e.target?.result;
   };
 
   reader.readAsDataURL(file);
+}
+
+function loadDefaultSampleImage() {
+  const img = new Image();
+  img.onload = () => renderImageToCanvases(img);
+  img.onerror = () => {
+    resetAll();
+  };
+  img.src = DEFAULT_SAMPLE_SRC;
 }
 
 imageInput.addEventListener("change", (event) => {
@@ -166,4 +179,4 @@ document.querySelectorAll("[data-preset]").forEach((button) => {
 });
 
 createKernelInputs();
-resetAll();
+loadDefaultSampleImage();
