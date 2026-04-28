@@ -92,7 +92,9 @@ function applyConvolution() {
 
   for (let y = 0; y < height; y += 1) {
     for (let x = 0; x < width; x += 1) {
-      let sum = 0;
+      let sumR = 0;
+      let sumG = 0;
+      let sumB = 0;
 
       for (let ky = -1; ky <= 1; ky += 1) {
         for (let kx = -1; kx <= 1; kx += 1) {
@@ -102,16 +104,16 @@ function applyConvolution() {
           if (nx < 0 || nx >= width || ny < 0 || ny >= height) continue;
 
           const i = (ny * width + nx) * 4;
-          const gray = data[i] * 0.299 + data[i + 1] * 0.587 + data[i + 2] * 0.114;
-          sum += gray * kernelValue;
+          sumR += data[i] * kernelValue;
+          sumG += data[i + 1] * kernelValue;
+          sumB += data[i + 2] * kernelValue;
         }
       }
 
       const pixelIndex = (y * width + x) * 4;
-      const value = Math.max(0, Math.min(255, Math.round(sum)));
-      output[pixelIndex] = value;
-      output[pixelIndex + 1] = value;
-      output[pixelIndex + 2] = value;
+      output[pixelIndex] = Math.max(0, Math.min(255, Math.round(sumR)));
+      output[pixelIndex + 1] = Math.max(0, Math.min(255, Math.round(sumG)));
+      output[pixelIndex + 2] = Math.max(0, Math.min(255, Math.round(sumB)));
       output[pixelIndex + 3] = data[pixelIndex + 3];
     }
   }
