@@ -77,6 +77,7 @@ const KERNEL_PRESETS = {
 let originalImageData = null;
 let resultImageData = null;
 let kernelSize = Number.parseInt(kernelSizeSelect.value, 10);
+let activePresetName = null;
 
 function getIdentityKernel(size) {
   const length = size * size;
@@ -102,6 +103,7 @@ function createKernelInputs(size) {
     input.value = "0";
     input.dataset.index = String(i);
     input.addEventListener("input", () => {
+      clearActivePreset();
       if (originalImageData) applyConvolution();
     });
     kernelGrid.appendChild(input);
@@ -303,7 +305,23 @@ function applyPreset(name) {
   const sizePreset = KERNEL_PRESETS[kernelSize];
   if (!sizePreset || !sizePreset[name]) return;
   setKernel(sizePreset[name]);
+  setActivePreset(name);
   if (originalImageData) applyConvolution();
+}
+
+function setActivePreset(name) {
+  activePresetName = name;
+  document.querySelectorAll("[data-preset]").forEach((button) => {
+    button.classList.toggle("active-preset", button.dataset.preset === name);
+  });
+}
+
+function clearActivePreset() {
+  if (!activePresetName) return;
+  activePresetName = null;
+  document.querySelectorAll("[data-preset]").forEach((button) => {
+    button.classList.remove("active-preset");
+  });
 }
 
 function downloadResultImage() {
@@ -323,6 +341,7 @@ imageInput.addEventListener("change", (event) => {
 kernelSizeSelect.addEventListener("change", () => {
   kernelSize = Number.parseInt(kernelSizeSelect.value, 10);
   createKernelInputs(kernelSize);
+  clearActivePreset();
   if (originalImageData) applyConvolution();
 });
 

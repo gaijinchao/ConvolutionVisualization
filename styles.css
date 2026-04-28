@@ -118,15 +118,33 @@ canvas {
   gap: 10px;
 }
 
+.preset-buttons button {
+  position: relative;
+}
+
+.preset-buttons button.active-preset {
+  border-color: #2563eb;
+  background: #eff6ff;
+  color: #1d4ed8;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2) inset;
+}
+
+.preset-buttons button.active-preset::after {
+  content: "";
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: #2563eb;
+}
+
 .analysis-row {
   display: grid;
   grid-template-columns: minmax(320px, auto) minmax(300px, 1fr);
   gap: 16px;
-  align-items: stretch;
-}
-
-.analysis-row > .card {
-  height: 100%;
+  align-items: start;
 }
 
 .config-grid {
@@ -155,9 +173,6 @@ canvas {
   font-family: Consolas, Monaco, monospace;
   white-space: pre-wrap;
   line-height: 1.45;
-  min-height: 260px;
-  max-height: 260px;
-  overflow: auto;
 }
 
 @media (max-width: 900px) {
